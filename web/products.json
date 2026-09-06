@@ -1,0 +1,897 @@
+[
+  {
+    "sku": "CA000DET-BRO",
+    "name": "DETROIT - Light jacket - hamilton brown",
+    "brand": "Carhartt WIP",
+    "category": "Jackets",
+    "type": "Light jacket",
+    "color": "brown",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 179.99,
+    "discount_percentage": 0,
+    "promotional_price": 179.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "TH001M66-NAV",
+    "name": "M66 TEK - Outdoor jacket - summit navy",
+    "brand": "The North Face",
+    "category": "Jackets",
+    "type": "Outdoor jacket",
+    "color": "navy",
+    "gender": "men",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 199.99,
+    "discount_percentage": 20,
+    "promotional_price": 159.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "LE002THE-BLU",
+    "name": "THE TRUCKER - Denim jacket - mid blue",
+    "brand": "Levi's",
+    "category": "Jackets",
+    "type": "Denim jacket",
+    "color": "blue",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 99.99,
+    "discount_percentage": 0,
+    "promotional_price": 99.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "AR003WOO-GRE",
+    "name": "WOOL OVERSHIRT - Summer jacket - charcoal",
+    "brand": "ARKET",
+    "category": "Jackets",
+    "type": "Summer jacket",
+    "color": "grey",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "original_price": 145.0,
+    "discount_percentage": 0,
+    "promotional_price": 145.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "AD004FIR-BLA",
+    "name": "FIREBIRD - Training jacket - black",
+    "brand": "adidas Originals",
+    "category": "Jackets",
+    "type": "Training jacket",
+    "color": "black",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 79.95,
+    "discount_percentage": 0,
+    "promotional_price": 79.95,
+    "currency": "EUR"
+  },
+  {
+    "sku": "NA005RAI-GRE",
+    "name": "RAINFOREST - Winter jacket - thyme green",
+    "brand": "Napapijri",
+    "category": "Jackets",
+    "type": "Winter jacket",
+    "color": "green",
+    "gender": "men",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 189.99,
+    "discount_percentage": 15,
+    "promotional_price": 161.49,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CO006BEL-BEI",
+    "name": "BELTED WOOL - Classic coat - camel",
+    "brand": "COS",
+    "category": "Coats",
+    "type": "Classic coat",
+    "color": "beige",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "original_price": 225.0,
+    "discount_percentage": 0,
+    "promotional_price": 225.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "WE007CLO-BEI",
+    "name": "CLOSURE - Trenchcoat - camel",
+    "brand": "Weekday",
+    "category": "Coats",
+    "type": "Trenchcoat",
+    "color": "beige",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 130.0,
+    "discount_percentage": 30,
+    "promotional_price": 91.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "SE008SLH-GRE",
+    "name": "SLHICONIC - Short coat - charcoal",
+    "brand": "Selected Homme",
+    "category": "Coats",
+    "type": "Short coat",
+    "color": "grey",
+    "gender": "men",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 159.99,
+    "discount_percentage": 0,
+    "promotional_price": 159.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "ED009MAR-BUR",
+    "name": "MARLA - Winter coat - port royale",
+    "brand": "EDITED",
+    "category": "Coats",
+    "type": "Winter coat",
+    "color": "burgundy",
+    "gender": "women",
+    "sizes": [
+      "34",
+      "36",
+      "38",
+      "40",
+      "42"
+    ],
+    "original_price": 179.99,
+    "discount_percentage": 0,
+    "promotional_price": 179.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "LE010501-BLU",
+    "name": "501 ORIGINAL - Straight leg jeans - mid blue",
+    "brand": "Levi's",
+    "category": "Jeans",
+    "type": "Straight leg jeans",
+    "color": "blue",
+    "gender": "unisex",
+    "sizes": [
+      "28",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "36"
+    ],
+    "original_price": 109.95,
+    "discount_percentage": 0,
+    "promotional_price": 109.95,
+    "currency": "EUR"
+  },
+  {
+    "sku": "WE011ROW-BLA",
+    "name": "ROWE EXTRA HIGH - Straight leg jeans - black",
+    "brand": "Weekday",
+    "category": "Jeans",
+    "type": "Straight leg jeans",
+    "color": "black",
+    "gender": "women",
+    "sizes": [
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31"
+    ],
+    "original_price": 65.0,
+    "discount_percentage": 0,
+    "promotional_price": 65.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "DR012CLA-BLU",
+    "name": "CLARK - Slim fit jeans - mid blue",
+    "brand": "Dr.Denim",
+    "category": "Jeans",
+    "type": "Slim fit jeans",
+    "color": "blue",
+    "gender": "men",
+    "sizes": [
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "36"
+    ],
+    "original_price": 59.99,
+    "discount_percentage": 25,
+    "promotional_price": 44.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "TO013SCA-BLU",
+    "name": "SCANTON - Slim fit jeans - mid blue",
+    "brand": "Tommy Jeans",
+    "category": "Jeans",
+    "type": "Slim fit jeans",
+    "color": "blue",
+    "gender": "men",
+    "sizes": [
+      "28",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34"
+    ],
+    "original_price": 89.9,
+    "discount_percentage": 0,
+    "promotional_price": 89.9,
+    "currency": "EUR"
+  },
+  {
+    "sku": "MO014TAI-BLA",
+    "name": "TAIKI - Bootcut jeans - black",
+    "brand": "Monki",
+    "category": "Jeans",
+    "type": "Bootcut jeans",
+    "color": "black",
+    "gender": "women",
+    "sizes": [
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30"
+    ],
+    "original_price": 45.0,
+    "discount_percentage": 0,
+    "promotional_price": 45.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CA015SIM-NAV",
+    "name": "SIMPLE PANT - Trousers - summit navy",
+    "brand": "Carhartt WIP",
+    "category": "Trousers",
+    "type": "Trousers",
+    "color": "navy",
+    "gender": "unisex",
+    "sizes": [
+      "28",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "36"
+    ],
+    "original_price": 89.99,
+    "discount_percentage": 0,
+    "promotional_price": 89.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CO016TAP-BEI",
+    "name": "TAPERED - Chinos - camel",
+    "brand": "COS",
+    "category": "Trousers",
+    "type": "Chinos",
+    "color": "beige",
+    "gender": "men",
+    "sizes": [
+      "44",
+      "46",
+      "48",
+      "50",
+      "52",
+      "54"
+    ],
+    "original_price": 79.0,
+    "discount_percentage": 0,
+    "promotional_price": 79.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "AR017WID-BLA",
+    "name": "WIDE LEG - Trousers - black",
+    "brand": "ARKET",
+    "category": "Trousers",
+    "type": "Trousers",
+    "color": "black",
+    "gender": "women",
+    "sizes": [
+      "32",
+      "34",
+      "36",
+      "38",
+      "40",
+      "42"
+    ],
+    "original_price": 89.0,
+    "discount_percentage": 0,
+    "promotional_price": 89.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "NI018SPO-GRE",
+    "name": "SPORTSWEAR CLUB - Tracksuit bottoms - charcoal",
+    "brand": "Nike",
+    "category": "Trousers",
+    "type": "Tracksuit bottoms",
+    "color": "grey",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 44.99,
+    "discount_percentage": 0,
+    "promotional_price": 44.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "SE019SLH-NAV",
+    "name": "SLHSLIM - Suit trousers - summit navy",
+    "brand": "Selected Homme",
+    "category": "Trousers",
+    "type": "Suit trousers",
+    "color": "navy",
+    "gender": "men",
+    "sizes": [
+      "44",
+      "46",
+      "48",
+      "50",
+      "52",
+      "54"
+    ],
+    "original_price": 69.99,
+    "discount_percentage": 40,
+    "promotional_price": 41.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CO020REL-WHI",
+    "name": "RELAXED - Shirt - off-white",
+    "brand": "COS",
+    "category": "Shirts",
+    "type": "Shirt",
+    "color": "white",
+    "gender": "men",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 69.0,
+    "discount_percentage": 0,
+    "promotional_price": 69.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "AR021LIN-BLU",
+    "name": "LINEN - Shirt - mid blue",
+    "brand": "ARKET",
+    "category": "Shirts",
+    "type": "Shirt",
+    "color": "blue",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 55.0,
+    "discount_percentage": 0,
+    "promotional_price": 55.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "SE022SLH-NAV",
+    "name": "SLHREGRICK - Formal shirt - summit navy",
+    "brand": "Selected Homme",
+    "category": "Shirts",
+    "type": "Formal shirt",
+    "color": "navy",
+    "gender": "men",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 49.99,
+    "discount_percentage": 0,
+    "promotional_price": 49.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "WO023AVE-WHI",
+    "name": "AVENIR - Shirt - off-white",
+    "brand": "Wood Wood",
+    "category": "Shirts",
+    "type": "Shirt",
+    "color": "white",
+    "gender": "unisex",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 110.0,
+    "discount_percentage": 20,
+    "promotional_price": 88.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "VE024VME-GRE",
+    "name": "VMELLA - Shirt - thyme green",
+    "brand": "Vero Moda",
+    "category": "Shirts",
+    "type": "Shirt",
+    "color": "green",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 35.99,
+    "discount_percentage": 0,
+    "promotional_price": 35.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "WE025ESS-WHI",
+    "name": "ESSENCE STANDARD - Basic T-shirt - off-white",
+    "brand": "Weekday",
+    "category": "T-Shirts & Polos",
+    "type": "Basic T-shirt",
+    "color": "white",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 15.0,
+    "discount_percentage": 0,
+    "promotional_price": 15.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CO026THE-NAV",
+    "name": "THE EXTRA FINE - Polo shirt - summit navy",
+    "brand": "COS",
+    "category": "T-Shirts & Polos",
+    "type": "Polo shirt",
+    "color": "navy",
+    "gender": "men",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 45.0,
+    "discount_percentage": 0,
+    "promotional_price": 45.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "NI027SPO-BLA",
+    "name": "SPORTSWEAR CLUB - Print T-shirt - black",
+    "brand": "Nike",
+    "category": "T-Shirts & Polos",
+    "type": "Print T-shirt",
+    "color": "black",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 27.99,
+    "discount_percentage": 0,
+    "promotional_price": 27.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CH028REV-GRE",
+    "name": "REVERSE WEAVE - Print T-shirt - charcoal",
+    "brand": "Champion",
+    "category": "T-Shirts & Polos",
+    "type": "Print T-shirt",
+    "color": "grey",
+    "gender": "unisex",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 29.99,
+    "discount_percentage": 33,
+    "promotional_price": 20.09,
+    "currency": "EUR"
+  },
+  {
+    "sku": "MO029CRO-PIN",
+    "name": "CROP - Basic T-shirt - dusty rose",
+    "brand": "Monki",
+    "category": "T-Shirts & Polos",
+    "type": "Basic T-shirt",
+    "color": "pink",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 12.0,
+    "discount_percentage": 0,
+    "promotional_price": 12.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CA030CHA-BUR",
+    "name": "CHASE - Basic T-shirt - port royale",
+    "brand": "Carhartt WIP",
+    "category": "T-Shirts & Polos",
+    "type": "Basic T-shirt",
+    "color": "burgundy",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 39.99,
+    "discount_percentage": 0,
+    "promotional_price": 39.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "ED031MAG-BLA",
+    "name": "MAGNA - Maxi dress - black",
+    "brand": "EDITED",
+    "category": "Dresses",
+    "type": "Maxi dress",
+    "color": "black",
+    "gender": "women",
+    "sizes": [
+      "32",
+      "34",
+      "36",
+      "38",
+      "40",
+      "42"
+    ],
+    "original_price": 89.99,
+    "discount_percentage": 0,
+    "promotional_price": 89.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "VE032VMH-NAV",
+    "name": "VMHARLOW - Shirt dress - summit navy",
+    "brand": "Vero Moda",
+    "category": "Dresses",
+    "type": "Shirt dress",
+    "color": "navy",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 49.99,
+    "discount_percentage": 20,
+    "promotional_price": 39.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "MO033MAB-GRE",
+    "name": "MABEL - Jersey dress - thyme green",
+    "brand": "Monki",
+    "category": "Dresses",
+    "type": "Jersey dress",
+    "color": "green",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 30.0,
+    "discount_percentage": 0,
+    "promotional_price": 30.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "ON034ONL-PIN",
+    "name": "ONLNOVA - Summer dress - dusty rose",
+    "brand": "ONLY",
+    "category": "Dresses",
+    "type": "Summer dress",
+    "color": "pink",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 27.99,
+    "discount_percentage": 0,
+    "promotional_price": 27.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "AR035ALI-WHI",
+    "name": "A-LINE - Day dress - off-white",
+    "brand": "ARKET",
+    "category": "Dresses",
+    "type": "Day dress",
+    "color": "white",
+    "gender": "women",
+    "sizes": [
+      "34",
+      "36",
+      "38",
+      "40",
+      "42"
+    ],
+    "original_price": 79.0,
+    "discount_percentage": 0,
+    "promotional_price": 79.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "NI036DRI-BLA",
+    "name": "DRI-FIT ACADEMY - Sports shorts - black",
+    "brand": "Nike",
+    "category": "Sportswear",
+    "type": "Sports shorts",
+    "color": "black",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 24.99,
+    "discount_percentage": 0,
+    "promotional_price": 24.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "AD037ADI-BLA",
+    "name": "ADICOLOR - Leggings - black",
+    "brand": "adidas Originals",
+    "category": "Sportswear",
+    "type": "Leggings",
+    "color": "black",
+    "gender": "women",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 32.95,
+    "discount_percentage": 0,
+    "promotional_price": 32.95,
+    "currency": "EUR"
+  },
+  {
+    "sku": "TH038MOU-BLA",
+    "name": "MOUNTAIN ATHLETICS - Hoodie - black",
+    "brand": "The North Face",
+    "category": "Sportswear",
+    "type": "Hoodie",
+    "color": "black",
+    "gender": "unisex",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 75.0,
+    "discount_percentage": 20,
+    "promotional_price": 60.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "NE039IMP-GRE",
+    "name": "IMPACT RUN - Running T-shirt - charcoal",
+    "brand": "New Balance",
+    "category": "Sportswear",
+    "type": "Running T-shirt",
+    "color": "grey",
+    "gender": "unisex",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 44.99,
+    "discount_percentage": 0,
+    "promotional_price": 44.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CH040REV-NAV",
+    "name": "REVERSE WEAVE - Hoodie - summit navy",
+    "brand": "Champion",
+    "category": "Streetwear",
+    "type": "Hoodie",
+    "color": "navy",
+    "gender": "unisex",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 89.99,
+    "discount_percentage": 0,
+    "promotional_price": 89.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "CA041HOO-BLA",
+    "name": "HOODED CHASE - Hoodie - black",
+    "brand": "Carhartt WIP",
+    "category": "Streetwear",
+    "type": "Hoodie",
+    "color": "black",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "original_price": 84.99,
+    "discount_percentage": 0,
+    "promotional_price": 84.99,
+    "currency": "EUR"
+  },
+  {
+    "sku": "WE042STA-WHI",
+    "name": "STANDARD - Sweatshirt - off-white",
+    "brand": "Weekday",
+    "category": "Streetwear",
+    "type": "Sweatshirt",
+    "color": "white",
+    "gender": "unisex",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 40.0,
+    "discount_percentage": 25,
+    "promotional_price": 30.0,
+    "currency": "EUR"
+  },
+  {
+    "sku": "WO043IAN-BLU",
+    "name": "IAN - Sweatshirt - mid blue",
+    "brand": "Wood Wood",
+    "category": "Streetwear",
+    "type": "Sweatshirt",
+    "color": "blue",
+    "gender": "unisex",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "original_price": 99.0,
+    "discount_percentage": 0,
+    "promotional_price": 99.0,
+    "currency": "EUR"
+  }
+]

@@ -220,3 +220,8 @@ __marimo__/
 # StyleSpeak generated dataset artifacts (regenerable via scripts/download_dataset.py).
 # The whole data/ tree is generated; download_dataset.py recreates the directories.
 /data/
+
+# The web/ storefront ships its inlined single-file build (regenerate: python3 web/build.py).
+# Overrides the generic dist/ rule above.
+!/web/dist/
+!/web/dist/**

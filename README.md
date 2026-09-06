@@ -89,6 +89,19 @@ Two pages sharing one cart in `st.session_state`:
 * **Cart** - full-size review of selected products with their local images,
   per-line quantity steppers, line totals and the subtotal.
 
+## Alternative front end: `web/`
+
+`web/` is a standalone, framework-free storefront (plain HTML + CSS + one
+vanilla JS file, no build step) with its own editorial identity - not the
+Streamlit look. It ships a 44-item curated demo catalog so it runs with zero
+setup, and adds an **AI stylist** search bar that parses a sentence
+("a navy jacket under EUR 150") into colour / cut / budget filters client-side
+and shows its reading back to you. See [`web/README.md`](web/README.md).
+
+```bash
+python3 -m http.server 8000 --directory web   # then open http://localhost:8000/
+```
+
 ## Development
 
 ```bash
