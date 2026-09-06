@@ -13,21 +13,32 @@ depends on the original Zalando product URLs (kept only as `source_url`).
 
 ```
 StyleSpeak/
-├── app.py                     # Streamlit catalog UI
+├── app.py                     # entrypoint: page config, logo, st.navigation
+├── views/
+│   ├── catalog.py             # catalog page (filter form + product grid)
+│   └── cart.py                # cart page (full-size review with images)
+├── assets/
+│   ├── logo.png               # monogram, used as favicon + st.logo icon
+│   └── logo_wide.png          # sidebar wordmark
 ├── .env                       # HF_TOKEN (git-ignored, create from .env.example)
 ├── .env.example
 ├── scripts/
-│   └── download_dataset.py    # dataset -> local images + products.json
+│   ├── download_dataset.py    # dataset -> local images + products.json
+│   └── make_logo.py           # regenerates assets/logo*.png
 ├── src/
 │   ├── config.py              # loads HF_TOKEN, fails loudly if missing
 │   ├── metadata.py            # raw-row cleaning (prices, sizes, discounts, ...)
-│   ├── catalog.py             # load / filter / sort / paginate
-│   └── cart.py                # framework-free shopping-cart logic
+│   ├── catalog.py             # Polars: load / filter / sort / paginate
+│   ├── cart.py                # framework-free shopping-cart logic
+│   └── ui.py                  # shared Streamlit helpers (formatting, state)
 ├── tests/                     # pytest unit tests for the pure logic
-└── data/products/
-    ├── products.json          # generated (git-ignored)
-    └── images/<sku>.jpg       # generated (git-ignored)
+└── data/                      # generated, git-ignored
+    └── products/
+        ├── products.json
+        └── images/<sku>.jpg
 ```
+
+The catalog data layer (`src/catalog.py`) uses **Polars**.
 
 ## Setup (WSL / Linux, uv)
 
@@ -67,9 +78,16 @@ source_url`.
 streamlit run app.py
 ```
 
-Features: product grid with local images, search by name, category / brand /
-promotional-price filters, "only discounted" toggle, sorting, pagination, and an
-Add-to-Cart flow with a cart summary in the sidebar (Streamlit session state).
+Two pages sharing one cart in `st.session_state`:
+
+* **Catalog** - product grid showing only image, name, price and any offer.
+  Sidebar carries a cart pointer above the filters, then a filter form
+  (name search, category, brand, size, promotional-price range, "only
+  discounted") that applies only when you press **Apply** (Reset clears it).
+  Sort and page size are outside the form and update immediately. Pagination
+  keeps thousands of products from rendering at once.
+* **Cart** - full-size review of selected products with their local images,
+  per-line quantity steppers, line totals and the subtotal.
 
 ## Development
 
