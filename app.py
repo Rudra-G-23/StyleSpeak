@@ -1,12 +1,12 @@
-"""StyleSpeak - local Zalando product catalog.
+"""StyleSpeak - local voice-powered fashion shopping assistant.
 
 Run with:
     streamlit run app.py
 
-Two pages (Catalog + Cart) share a single cart in ``st.session_state``. The app
-reads only local files (``data/products/products.json`` and the images under
-``data/products/images/``): it never contacts Hugging Face and never depends on
-the original Zalando URLs, which are kept purely as ``source_url``.
+Three pages (Assistant + Catalog + Cart) share a single cart in
+``st.session_state``. The app reads only local files and talks only to a local
+Ollama server: it never contacts Hugging Face, OpenAI, or any cloud service.
+The original Zalando URLs are kept purely as ``source_url``.
 """
 
 from __future__ import annotations
@@ -32,7 +32,8 @@ elif _icon:
 
 navigation = st.navigation(
     [
-        st.Page("views/catalog.py", title="Catalog", icon=":material/storefront:", default=True),
+        st.Page("views/assistant.py", title="Assistant", icon=":material/mic:", default=True),
+        st.Page("views/catalog.py", title="Catalog", icon=":material/storefront:"),
         st.Page("views/cart.py", title="Cart", icon=":material/shopping_cart:"),
     ]
 )
