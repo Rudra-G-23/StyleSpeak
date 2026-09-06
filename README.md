@@ -51,7 +51,7 @@ StyleSpeak/
 └── data/                        # generated, git-ignored
     └── products/
         ├── products.json               # full ~192k catalog
-        ├── catalog_demo.json           # curated ~128-product assistant catalog
+        ├── catalog_demo.json           # curated ~200-product assistant catalog
         ├── catalog_demo_embeddings.npy # precomputed MiniLM vectors
         └── images/<sku>.jpg
 ```
@@ -155,7 +155,7 @@ Three pages sharing one `{sku: quantity}` cart in `st.session_state`:
 ```bash
 uv run ruff check .
 uv run ruff format --check .
-uv run pytest          # 88 tests, all pure logic - no Ollama / network needed
+uv run pytest          # 90 tests, all pure logic - no Ollama / network needed
 ```
 
 The assistant tests stub the LLM call (`tests/test_handler.py`) and cover

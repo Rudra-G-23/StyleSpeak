@@ -140,17 +140,29 @@ ok, message = health()
 if not ok:
     st.error(message)
 
+# Keep the voice bar parked just above the docked chat input from the first
+# load: the conversation area reserves the vertical space so the inputs do not
+# drift up the page when the history is short.
+st.markdown(
+    """
+    <style>
+    .st-key-assistant_convo { min-height: 56vh; }
+    .st-key-assistant_voice [data-testid="stAudioInput"] { margin-top: .25rem; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 # Conversation renders into this slot; the voice + text inputs sit just below it,
 # right above Streamlit's docked chat bar.
-conversation = st.container()
+conversation = st.container(key="assistant_convo")
 
 # --------------------------------------------------------------------------- #
 # Inputs - microphone (voice) and chat box (text). Both call the same handler.
 # --------------------------------------------------------------------------- #
-with st.container():
-    st.caption("Or record your voice - it clears itself after each request:")
+with st.container(key="assistant_voice"):
     audio = st.audio_input(
-        "Record a request",
+        "Speak your request",
         key=f"voice_{st.session_state.assistant_audio_key}",
         label_visibility="collapsed",
     )

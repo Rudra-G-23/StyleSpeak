@@ -3,7 +3,7 @@
 The full catalog (``data/products/products.json``, ~192k rows) powers the manual
 filter grid in ``views/catalog.py``. The assistant works instead over a tiny
 curated slice - ``data/products/catalog_demo.json`` - built once by
-``scripts/build_demo_catalog.py``. Keeping it small (~130 products) means:
+``scripts/build_demo_catalog.py``. Keeping it small (~200 products) means:
 
 * MiniLM embeddings fit in a few hundred KB and are precomputed to ``.npy``.
 * The LLM only ever reasons about a handful of results at a time.
@@ -59,8 +59,32 @@ _COLOR_TOKENS_BY_LEN: tuple[str, ...] = tuple(sorted(_TOKEN_TO_COLOR, key=len, r
 
 CANONICAL_COLORS: tuple[str, ...] = tuple(_COLOR_SYNONYMS)
 
-_WOMEN_RE = re.compile(r"\b(women|woman|ladies|female)\b|\bw\b", re.IGNORECASE)
-_MEN_RE = re.compile(r"\b(men|man|male)\b", re.IGNORECASE)
+# Gender cues. The scraped data has no gender field, so we lean on:
+#  * the two gendered categories (fully reliable),
+#  * an explicit "UNISEX" in the name,
+#  * Zalando's standalone uppercase "W" women marker (e.g. "NORDKAP SOFTSHELL W"),
+#  * women-only garment words and explicit men/women words.
+_UNISEX_RE = re.compile(r"\bunisex\b", re.IGNORECASE)
+_W_TOKEN_RE = re.compile(r"(?<![A-Za-z])W(?![A-Za-z])")  # uppercase only
+_WOMEN_WORD_RE = re.compile(r"\b(women|womens|woman|ladies|female|damen)\b", re.IGNORECASE)
+_WOMEN_CUT_RE = re.compile(
+    r"\b(dress|dresses|skirt|blouse|gown|jumpsuit|playsuit|smock|peplum|"
+    r"crop|cropped|racerback|bodycon|bralette|camisole|cami)\b",
+    re.IGNORECASE,
+)
+_MEN_WORD_RE = re.compile(r"\b(men|mens|man|male|herren|boyfriend)\b", re.IGNORECASE)
+
+
+def _name_gender_cue(name: str) -> str | None:
+    """A gender hint from the product name alone, or ``None`` when it says nothing."""
+    text = name or ""
+    if _UNISEX_RE.search(text):
+        return "unisex"
+    if _W_TOKEN_RE.search(text) or _WOMEN_WORD_RE.search(text) or _WOMEN_CUT_RE.search(text):
+        return "women"
+    if _MEN_WORD_RE.search(text):
+        return "men"
+    return None
 
 
 def detect_color(name: str) -> str | None:
@@ -87,11 +111,7 @@ def detect_gender(name: str, category: str) -> str:
         return "women"
     if category == "Men T-Shirts & Polos":
         return "men"
-    if _WOMEN_RE.search(name or ""):
-        return "women"
-    if _MEN_RE.search(name or ""):
-        return "men"
-    return "unisex"
+    return _name_gender_cue(name) or "unisex"
 
 
 def product_type(name: str) -> str:
@@ -137,7 +157,7 @@ def products_by_sku(products: list[dict] | None = None) -> dict[str, dict]:
 
 
 # --------------------------------------------------------------------------- #
-# Embeddings (precomputed; cosine similarity, no vector DB for ~130 rows)
+# Embeddings (precomputed; cosine similarity, no vector DB for ~200 rows)
 # --------------------------------------------------------------------------- #
 def _l2_normalize(matrix: np.ndarray) -> np.ndarray:
     norms = np.linalg.norm(matrix, axis=1, keepdims=True)
@@ -207,6 +227,26 @@ def _matches_keywords(product: dict, keywords: list[str] | None) -> bool:
     return all(str(kw).lower().strip() in haystack for kw in keywords if str(kw).strip())
 
 
+def _matches_gender(product: dict, gender: str | None) -> bool:
+    """Strict-ish gender match.
+
+    The data barely tags gender, so a requested gender:
+      * keeps items explicitly tagged that gender,
+      * keeps genuinely unisex items *unless* their name carries an
+        opposite-gender cue (a "crop top" is not men's wear),
+      * drops items explicitly tagged the opposite gender.
+    """
+    if not gender or gender == "unisex":
+        return True
+    tagged = product.get("gender", "unisex")
+    if tagged == gender:
+        return True
+    if tagged != "unisex":  # explicitly the other gender
+        return False
+    cue = _name_gender_cue(product.get("name", ""))
+    return cue in (None, "unisex", gender)
+
+
 def apply_filters(
     products: list[dict],
     *,
@@ -226,7 +266,7 @@ def apply_filters(
             continue
         if color and product.get("color") != color and color not in product.get("name", "").lower():
             continue
-        if gender and gender != "unisex" and product.get("gender") not in (gender, "unisex"):
+        if not _matches_gender(product, gender):
             continue
         price = float(product.get("promotional_price") or 0.0)
         if min_price is not None and price < float(min_price):
@@ -263,6 +303,15 @@ def search(
     )
     if not matched:
         return []
+
+    # If a gender was asked for and at least a couple of matches are explicitly
+    # that gender, drop the merely-plausible unisex ones so the result reads as
+    # truly gendered. Fall back to the wider set only when the data is too thin.
+    wanted = (gender or "").lower().strip()
+    if wanted in ("men", "women"):
+        tagged = [p for p in matched if p.get("gender") == wanted]
+        if len(tagged) >= 2:
+            matched = tagged
 
     query = (semantic_query or "").strip()
     if query and len(query) >= 3:

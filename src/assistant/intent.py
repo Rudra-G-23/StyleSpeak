@@ -45,7 +45,11 @@ blue", "a casual outfit for a birthday dinner under 80").
     "response":"one short friendly sentence"}
    Rules:
    - Put hard constraints (colour, category, price, gender) in "filters".
+   - Set "gender" whenever the shopper signals it: "men/mens/for him/male" -> \
+"men"; "women/womens/for her/ladies" -> "women". Otherwise null.
    - "under 80" -> max_price 80. "over 40" -> min_price 40. "40 to 80" -> both.
+   - A bare number with "range"/"budget"/"around" is a max: "500 range" -> \
+max_price 500.
    - "keywords" holds ONLY concrete garment nouns that are not a category \
 (e.g. "pants","hoodie","shorts","blazer"). NEVER put generic words like \
 "clothes","outfit","something","items" in keywords - leave it [].
@@ -84,6 +88,22 @@ _FEWSHOT: list[tuple[str, dict]] = [
             "keywords": ["pants"],
             "semantic_query": "",
             "response": "Here are some black trousers under 60 euros.",
+        },
+    ),
+    (
+        "give me a few men's shirts in black, 500 range",
+        {
+            "action": "search_products",
+            "filters": {
+                "category": "shirt",
+                "color": "black",
+                "gender": "men",
+                "min_price": None,
+                "max_price": 500,
+            },
+            "keywords": [],
+            "semantic_query": "",
+            "response": "Here are some black men's shirts within your budget.",
         },
     ),
     (

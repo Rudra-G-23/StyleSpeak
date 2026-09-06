@@ -36,6 +36,15 @@ class TestDetectGender:
     def test_w_suffix_is_women(self):
         name = "NORDIC WIND TIGHTS W - Outdoor trousers - black"
         assert detect_gender(name, "Sportswear") == "women"
+        # lower-case 'w' as a stray token must NOT trigger women
+        assert detect_gender("w - Shirt - navy", "Shirts") == "unisex"
+
+    def test_women_cut_words(self):
+        assert detect_gender("COMPRESSION CROP - Top - black", "Shirts") == "women"
+        assert detect_gender("SUMMER - Maxi dress - red", "Shirts") == "women"
+
+    def test_explicit_unisex_wins(self):
+        assert detect_gender("PANTS UNISEX - Tracksuit bottoms - navy", "Streetwear") == "unisex"
 
     def test_men_token(self):
         assert detect_gender("CLASSIC MEN - Shirt - navy", "Shirts") == "men"
@@ -96,13 +105,21 @@ PRODUCTS = [
         "gender": "unisex",
         "promotional_price": 70.0,
     },
+    {
+        "sku": "E",
+        "name": "COMPRESSION CROP - Top - black",
+        "category": "Shirts",
+        "color": "black",
+        "gender": "unisex",  # tagged unisex, but the name says "crop"
+        "promotional_price": 30.0,
+    },
 ]
 
 
 class TestApplyFilters:
     def test_colour_filter(self):
         out = apply_filters(PRODUCTS, color="black")
-        assert {p["sku"] for p in out} == {"A", "D"}
+        assert {p["sku"] for p in out} == {"A", "D", "E"}
 
     def test_price_bounds(self):
         out = apply_filters(PRODUCTS, min_price=50, max_price=100)
@@ -112,13 +129,14 @@ class TestApplyFilters:
         out = apply_filters(PRODUCTS, category="trousers")
         assert {p["sku"] for p in out} == {"A", "C"}  # jeans + cargo trousers
 
-    def test_gender_keeps_matching_and_unisex(self):
-        # Gender signal in the data is weak, so unisex items stay in for any
-        # gendered query; only the *other* explicit gender is excluded.
-        women = {p["sku"] for p in apply_filters(PRODUCTS, gender="women")}
-        assert women == {"A", "B", "D"}  # B women + A/D unisex, C (men) dropped
+    def test_gender_keeps_matching_and_cue_free_unisex(self):
+        # Requested gender: keep that gender + genuinely unisex items, drop the
+        # other explicit gender AND unisex items whose name carries an
+        # opposite-gender cue ("crop" -> not men's wear).
         men = {p["sku"] for p in apply_filters(PRODUCTS, gender="men")}
-        assert men == {"A", "C", "D"}  # C men + A/D unisex, B (women) dropped
+        assert men == {"A", "C", "D"}  # C men + plain-unisex A/D; B women, E "crop" dropped
+        women = {p["sku"] for p in apply_filters(PRODUCTS, gender="women")}
+        assert women == {"A", "B", "D", "E"}  # B women + unisex A/D/E; C (men) dropped
 
     def test_generic_keyword_not_required(self):
         # keywords that do not appear anywhere collapse the set - caller must
@@ -126,4 +144,4 @@ class TestApplyFilters:
         assert apply_filters(PRODUCTS, keywords=["tuxedo"]) == []
 
     def test_no_filters_returns_all(self):
-        assert len(apply_filters(PRODUCTS)) == 4
+        assert len(apply_filters(PRODUCTS)) == 5

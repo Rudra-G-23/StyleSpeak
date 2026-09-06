@@ -54,7 +54,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    p.add_argument("--size", type=int, default=128, help="target number of products (default 128)")
+    p.add_argument("--size", type=int, default=200, help="target number of products (default 200)")
     p.add_argument("--min-price", type=float, default=5.0)
     p.add_argument("--max-price", type=float, default=300.0)
     p.add_argument("--no-embed", action="store_true", help="skip precomputing embeddings")
