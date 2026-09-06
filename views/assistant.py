@@ -7,8 +7,6 @@ speech-to-text step in front. Text stays as the fallback / debugging input.
 
 from __future__ import annotations
 
-import hashlib
-
 import streamlit as st
 
 from src.assistant.handler import AssistantState, handle_user_message
@@ -25,7 +23,9 @@ def ensure_assistant_state() -> None:
     st.session_state.setdefault("assistant_msgs", [])  # [{role, content, kind, results}]
     st.session_state.setdefault("assistant_last_results", [])  # ordered result dicts
     st.session_state.setdefault("assistant_last_filters", None)
-    st.session_state.setdefault("assistant_audio_sig", "")
+    # Bumped after every recording so st.audio_input is rebuilt empty and is
+    # immediately ready for the next utterance (never re-processes the old one).
+    st.session_state.setdefault("assistant_audio_key", 0)
     st.session_state.setdefault("assistant_warmed", False)
 
 
@@ -93,6 +93,9 @@ def render_results(results: list[dict], *, key_prefix: str, interactive: bool) -
 
 def render_history() -> None:
     msgs = st.session_state.assistant_msgs
+    if not msgs:
+        st.info("Your conversation will appear here. Try the examples above.")
+        return
     for index, msg in enumerate(msgs):
         avatar = "🧑" if msg["role"] == "user" else "🛍️"
         with st.chat_message(msg["role"], avatar=avatar):
@@ -137,29 +140,37 @@ ok, message = health()
 if not ok:
     st.error(message)
 
+# Conversation renders into this slot; the voice + text inputs sit just below it,
+# right above Streamlit's docked chat bar.
+conversation = st.container()
 
 # --------------------------------------------------------------------------- #
 # Inputs - microphone (voice) and chat box (text). Both call the same handler.
 # --------------------------------------------------------------------------- #
-with st.container(border=True):
-    st.markdown("**Speak to the assistant**")
-    audio = st.audio_input("Record a request", label_visibility="collapsed")
+with st.container():
+    st.caption("Or record your voice - it clears itself after each request:")
+    audio = st.audio_input(
+        "Record a request",
+        key=f"voice_{st.session_state.assistant_audio_key}",
+        label_visibility="collapsed",
+    )
 
 typed = st.chat_input("Type a request, or 'add the second one'")
 
 pending_text: str | None = None
 
 if audio is not None:
-    signature = hashlib.md5(audio.getvalue()).hexdigest()
-    if signature and signature != st.session_state.assistant_audio_sig:
-        st.session_state.assistant_audio_sig = signature
-        try:
-            with st.spinner("Transcribing your voice locally..."):
-                pending_text = transcribe(audio.getvalue())
-        except TranscriptionError as exc:
-            st.session_state.assistant_msgs.append(
-                {"role": "assistant", "kind": "error", "content": str(exc)}
-            )
+    try:
+        with st.spinner("Transcribing your voice locally..."):
+            pending_text = transcribe(audio.getvalue())
+    except TranscriptionError as exc:
+        st.session_state.assistant_msgs.append(
+            {"role": "assistant", "kind": "error", "content": str(exc)}
+        )
+    # Consume this recording: next run rebuilds st.audio_input empty.
+    st.session_state.assistant_audio_key += 1
+    if not pending_text:
+        st.rerun()
 
 if typed:
     pending_text = typed.strip()
@@ -196,9 +207,7 @@ if pending_text:
 
 
 # --------------------------------------------------------------------------- #
-# Conversation
+# Conversation (filled last so the newest turn is included, shown above inputs)
 # --------------------------------------------------------------------------- #
-if not st.session_state.assistant_msgs:
-    st.info("Your conversation will appear here. Try the examples above.")
-else:
+with conversation:
     render_history()
