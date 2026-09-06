@@ -1,0 +1,1 @@
+"""StyleSpeak product catalog package."""

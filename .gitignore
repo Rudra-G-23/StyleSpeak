@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# StyleSpeak generated dataset artifacts (regenerable via scripts/download_dataset.py).
+# The whole data/ tree is generated; download_dataset.py recreates the directories.
+/data/
