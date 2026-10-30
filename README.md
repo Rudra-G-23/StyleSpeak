@@ -93,7 +93,7 @@ Two pages sharing one cart in `st.session_state`:
 
 `web/` is a standalone, framework-free storefront (plain HTML + CSS + one
 vanilla JS file, no build step) with its own editorial identity - not the
-Streamlit look. It ships a 44-item curated demo catalog so it runs with zero
+Streamlit look. It ships a 44-item real-image demo catalog so it runs with zero
 setup, and adds an **AI stylist** search bar that parses a sentence
 ("a navy jacket under EUR 150") into colour / cut / budget filters client-side
 and shows its reading back to you. See [`web/README.md`](web/README.md).
@@ -101,6 +101,12 @@ and shows its reading back to you. See [`web/README.md`](web/README.md).
 ```bash
 python3 -m http.server 8000 --directory web   # then open http://localhost:8000/
 ```
+
+The web demo also includes browser voice input, a text-and-voice multi-turn
+stylist, size selection, a persistent cart and a local order-confirmation flow.
+It uses an inspectable hybrid local retriever rather than a hosted model, so the
+showcase has no API keys or runtime model download. Docker deployment details
+are in [`web/README.md`](web/README.md).
 
 ## Development
 

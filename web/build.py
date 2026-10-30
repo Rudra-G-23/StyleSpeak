@@ -1,4 +1,4 @@
-"""Inline web/{styles.css, app.js, products.json} into single-file builds.
+"""Inline web/{styles.css, app.js, products.json, search-index.json} into builds.
 
     python3 web/build.py
 
@@ -10,6 +10,7 @@ Re-running is idempotent: same inputs produce byte-identical output.
 """
 
 import re
+import shutil
 from pathlib import Path
 
 WEB = Path(__file__).resolve().parent
@@ -30,6 +31,8 @@ def build() -> None:
     css = (WEB / "styles.css").read_text(encoding="utf-8")
     js = (WEB / "app.js").read_text(encoding="utf-8")
     data = (WEB / "products.json").read_text(encoding="utf-8").strip().replace("</", "<\\/")
+    search_index = (WEB / "search-index.json").read_text(encoding="utf-8").strip()
+    search_index = search_index.replace("</", "<\\/")
 
     html = html.replace(
         '<link rel="stylesheet" href="styles.css">',
@@ -37,10 +40,14 @@ def build() -> None:
     )
     html = html.replace(
         '<script src="app.js" defer></script>',
-        f"<script>\nwindow.__CATALOG__ = {data};\n{js}\n</script>",
+        f"<script>\nwindow.__CATALOG__ = {data};\n"
+        f"window.__SEARCH_INDEX__ = {search_index};\n{js}\n</script>",
     )
 
     DIST.mkdir(parents=True, exist_ok=True)
+    images = WEB / "images"
+    if images.exists():
+        shutil.copytree(images, DIST / "images", dirs_exist_ok=True)
     (DIST / "index.html").write_text(html, encoding="utf-8")
 
     fragment = html

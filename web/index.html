@@ -14,7 +14,10 @@
   <header class="head">
     <div class="wrap">
       <a class="mark" href="./">Style<span>Speak</span></a>
-      <button class="bag" id="openbag" type="button">Bag<b id="bagcount"></b></button>
+      <div class="head-actions">
+        <button class="quiet-button" id="theme" type="button" aria-label="Switch colour theme">Theme</button>
+        <button class="bag" id="openbag" type="button">Bag<b id="bagcount"></b></button>
+      </div>
     </div>
   </header>
 
@@ -22,12 +25,16 @@
     <section class="hero">
       <p class="eyebrow">Shop by description, not by filter</p>
       <h1>What are you looking&nbsp;for?</h1>
-      <p class="lede">Say it the way you'd say it out loud - colour, cut, occasion, budget. The stylist reads your sentence and pulls the rack.</p>
+      <p class="lede">Say it or type it naturally - colour, cut, occasion, budget. The stylist reads your request, pulls the rack and can talk it through with you.</p>
 
       <form class="ask" id="ask" role="search" autocomplete="off">
         <input id="q" name="q" type="text" aria-label="Describe what you are looking for" placeholder="a navy jacket under EUR 150...">
+        <button class="voice" id="voice" type="button" aria-label="Speak your shopping request" aria-pressed="false">
+          <span aria-hidden="true">Speak</span>
+        </button>
         <button class="go" type="submit">Style me</button>
       </form>
+      <p class="voice-status" id="voice-status" aria-live="polite">Voice is ready when your browser supports it.</p>
 
       <div class="egs" id="egs">
         <span class="eyebrow">Try</span>
@@ -63,17 +70,19 @@
   </main>
 
   <section aria-label="Products">
-    <div class="grid" id="grid"></div>
+    <div class="wrap grid-wrap">
+      <div class="grid" id="grid"></div>
+    </div>
   </section>
 
   <footer class="colophon">
     <div class="wrap">
       <span class="eyebrow">StyleSpeak, a local demo</span>
-      A front end for the <b>StyleSpeak</b> voice-shopping project: a natural-language
+      A front end for the <b>StyleSpeak</b> voice-shopping project: a local hybrid
       stylist over a Zalando-style fashion catalog. This page runs the demo slice
-      (<b id="pcount">44</b> pieces) entirely in your browser, with no server and no
-      tracking. There is <b>no product photography</b> offline, so every garment is
-      drawn from its colour and a weave keyed to its cut.
+      (<b id="pcount">44</b> pieces) in your browser, with no account, tracking or
+      payment collection. The catalog includes locally bundled product photography
+      from the demo data set, so browsing works without a runtime network request.
     </div>
   </footer>
 
@@ -92,7 +101,7 @@
         <span class="eyebrow">Subtotal</span>
         <span class="total" id="subtotal">&euro; 0,00</span>
       </div>
-      <button class="pay" id="pay" type="button">Checkout</button>
+      <button class="pay" id="pay" type="button">Review order</button>
       <div class="mini-row">
         <span class="demo">Prices incl. VAT, demo data</span>
         <button class="clear" id="clearbag" type="button">Clear bag</button>
@@ -101,6 +110,59 @@
   </aside>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <button class="stylist-launch" id="open-stylist" type="button" aria-haspopup="dialog">
+    <span class="stylist-launch-kicker">Need a second opinion?</span>
+    Talk to the stylist
+  </button>
+
+  <dialog class="modal stylist-modal" id="stylist-modal" aria-labelledby="stylist-title">
+    <div class="modal-head">
+      <div>
+        <span class="eyebrow">Local hybrid stylist</span>
+        <h2 id="stylist-title">Tell me what you want to wear.</h2>
+      </div>
+      <button class="back" id="close-stylist" type="button">&larr; Back to shop</button>
+    </div>
+    <div class="chat-log" id="chat-log" aria-live="polite"></div>
+    <form class="chat-form" id="chat-form" autocomplete="off">
+      <label class="sr-only" for="chat-input">Message the stylist</label>
+      <input id="chat-input" type="text" placeholder="For a winter wedding under €180...">
+      <button class="voice chat-voice" id="chat-voice" type="button" aria-label="Speak to the stylist" aria-pressed="false">Speak</button>
+      <button class="go" type="submit">Send</button>
+    </form>
+    <div class="chat-options">
+      <label class="speak-back"><input id="speak-back" type="checkbox"> Read replies aloud</label>
+      <span>Voice stays in your browser.</span>
+    </div>
+  </dialog>
+
+  <dialog class="modal variant-modal" id="variant-modal" aria-labelledby="variant-title">
+    <div class="modal-head">
+      <div>
+        <span class="eyebrow">Choose your size</span>
+        <h2 id="variant-title">Add to bag</h2>
+      </div>
+      <button class="x" id="close-variant" type="button" aria-label="Close size selection">&times;</button>
+    </div>
+    <div id="variant-product"></div>
+    <div class="size-list" id="size-list" role="group" aria-label="Available sizes"></div>
+    <button class="pay" id="confirm-variant" type="button" disabled>Add selected size</button>
+  </dialog>
+
+  <dialog class="modal checkout-modal" id="checkout-modal" aria-labelledby="checkout-title">
+    <div class="modal-head">
+      <div>
+        <span class="eyebrow">Demo checkout</span>
+        <h2 id="checkout-title">Review your order</h2>
+      </div>
+      <button class="x" id="close-checkout" type="button" aria-label="Close order review">&times;</button>
+    </div>
+    <div class="checkout-lines" id="checkout-lines"></div>
+    <p class="checkout-total">Total <strong id="checkout-total"></strong></p>
+    <p class="checkout-note">This is a local product demo. Placing an order only creates a confirmation in this browser.</p>
+    <button class="pay" id="place-order" type="button">Place demo order</button>
+  </dialog>
 
   <noscript>
     <p style="padding:24px;font-family:sans-serif">StyleSpeak needs JavaScript to run the stylist and the catalog.</p>
