@@ -1,21 +1,21 @@
 [project]
 name = "stylespeak"
-version = "0.1.0"
-description = "Local Zalando product dataset pipeline and Streamlit e-commerce catalog"
+version = "1.0.0"
+description = "Local-first AI fashion shopping assistant"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "datasets>=5.0.1",
-    "huggingface-hub>=1.30.0",
-    "pillow>=12.3.0",
-    "polars>=1.44.1",
-    "pyarrow>=25.0.1",
-    "python-dotenv>=1.2.3",
-    "streamlit>=1.63.0",
+    "fastapi>=0.162.5",
+    "faster-whisper>=1.2.1",
+    "pydantic-settings>=2.16.2",
+    "python-multipart>=0.0.32",
+    "sqlalchemy>=2.1.8",
+    "uvicorn[standard]>=0.52.4",
 ]
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "pytest>=9.1.1",
     "ruff>=0.16.6",
 ]
@@ -23,11 +23,14 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py313"
-extend-exclude = ["data"]
+extend-exclude = ["data", "legacy"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
 
+[tool.ruff.lint.per-file-ignores]
+"backend/stylespeak_api/main.py" = ["B008"]
+
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests_backend"]
 pythonpath = ["."]

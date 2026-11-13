@@ -1,117 +1,34 @@
 # StyleSpeak
 
-Local product-dataset pipeline and Streamlit e-commerce catalog built on the
-Hugging Face dataset [`thivav/zalando_fashionista_x100`](https://huggingface.co/datasets/thivav/zalando_fashionista_x100)
-(~192k Zalando fashion products).
+StyleSpeak is a local-first AI fashion-shopping demo built for an 8 GB development machine. It pairs a premium React storefront with a FastAPI catalog service, a validated SQLite/FTS5 product subset, conversational reference resolution, session carts, real local dataset images, and optional local speech transcription.
 
-The pipeline downloads the **complete** dataset once, saves every product image
-locally, and stores cleaned metadata as JSON. The Streamlit app then runs fully
-offline from those local files - it never calls Hugging Face at runtime and never
-depends on the original Zalando product URLs (kept only as `source_url`).
+The active application lives in `frontend/` and `backend/`. Prior Streamlit and framework-free experiments were preserved under `legacy/` after a recovery branch was created; they are not runtime dependencies.
 
-## Project layout
-
-```
-StyleSpeak/
-├── app.py                     # entrypoint: page config, logo, st.navigation
-├── views/
-│   ├── catalog.py             # catalog page (filter form + product grid)
-│   └── cart.py                # cart page (full-size review with images)
-├── assets/
-│   ├── logo.png               # monogram, used as favicon + st.logo icon
-│   └── logo_wide.png          # sidebar wordmark
-├── .env                       # HF_TOKEN (git-ignored, create from .env.example)
-├── .env.example
-├── scripts/
-│   ├── download_dataset.py    # dataset -> local images + products.json
-│   └── make_logo.py           # regenerates assets/logo*.png
-├── src/
-│   ├── config.py              # loads HF_TOKEN, fails loudly if missing
-│   ├── metadata.py            # raw-row cleaning (prices, sizes, discounts, ...)
-│   ├── catalog.py             # Polars: load / filter / sort / paginate
-│   ├── cart.py                # framework-free shopping-cart logic
-│   └── ui.py                  # shared Streamlit helpers (formatting, state)
-├── tests/                     # pytest unit tests for the pure logic
-└── data/                      # generated, git-ignored
-    └── products/
-        ├── products.json
-        └── images/<sku>.jpg
-```
-
-The catalog data layer (`src/catalog.py`) uses **Polars**.
-
-## Setup (WSL / Linux, uv)
+## Run locally
 
 ```bash
-# 1. Install dependencies into a local virtual environment
 uv sync
-
-# 2. Configure Hugging Face auth
-cp .env.example .env
-# edit .env and set your token:  HF_TOKEN=hf_xxx
-# create one at https://huggingface.co/settings/tokens
+uv run python -m backend.stylespeak_api.ingest --limit 2500
+uv run uvicorn backend.stylespeak_api.main:app --port 8000
 ```
 
-`HF_TOKEN` is read only from the environment (via `.env` for local dev). It is
-never hardcoded and `.env` is git-ignored.
-
-## Build the catalog
+In another terminal:
 
 ```bash
-uv run python scripts/download_dataset.py
+cd frontend
+npm install
+VITE_API_URL=http://127.0.0.1:8000 npm run dev
 ```
 
-* Reuses the Hugging Face dataset cache - re-runs do not re-download it.
-* Skips images that already exist and open cleanly (use `--force` to rewrite).
-* Missing/corrupt images are counted and reported, never fatal.
-* Prints progress and a final summary (products, images written, failures).
-* `--limit N` / `--start N` process a slice; Ctrl-C flushes progress so far.
+Open `http://127.0.0.1:5173`.
 
-Output: `data/products/images/<sku>.jpg` and `data/products/products.json` with
-fields `sku, name, brand, category, categories, sizes, classification,
-original_price, discount_percentage, promotional_price, currency, image_path,
-source_url`.
-
-## Run the app
+## Quality checks
 
 ```bash
-streamlit run app.py
+uv run pytest tests_backend -q
+uv run ruff check backend tests_backend
+cd frontend && npm run typecheck && npm run build
+cd frontend && npm run test:e2e
 ```
 
-Two pages sharing one cart in `st.session_state`:
-
-* **Catalog** - product grid showing only image, name, price and any offer.
-  Sidebar carries a cart pointer above the filters, then a filter form
-  (name search, category, brand, size, promotional-price range, "only
-  discounted") that applies only when you press **Apply** (Reset clears it).
-  Sort and page size are outside the form and update immediately. Pagination
-  keeps thousands of products from rendering at once.
-* **Cart** - full-size review of selected products with their local images,
-  per-line quantity steppers, line totals and the subtotal.
-
-## Alternative front end: `web/`
-
-`web/` is a standalone, framework-free storefront (plain HTML + CSS + one
-vanilla JS file, no build step) with its own editorial identity - not the
-Streamlit look. It ships a 44-item real-image demo catalog so it runs with zero
-setup, and adds an **AI stylist** search bar that parses a sentence
-("a navy jacket under EUR 150") into colour / cut / budget filters client-side
-and shows its reading back to you. See [`web/README.md`](web/README.md).
-
-```bash
-python3 -m http.server 8000 --directory web   # then open http://localhost:8000/
-```
-
-The web demo also includes browser voice input, a text-and-voice multi-turn
-stylist, size selection, a persistent cart and a local order-confirmation flow.
-It uses an inspectable hybrid local retriever rather than a hosted model, so the
-showcase has no API keys or runtime model download. Docker deployment details
-are in [`web/README.md`](web/README.md).
-
-## Development
-
-```bash
-uv run ruff check .
-uv run ruff format --check .
-uv run pytest
-```
+Read [the local setup guide](docs/LOCAL-SETUP.md), [architecture](docs/ARCHITECTURE.md), [known limitations](docs/KNOWN-ISSUES.md), and [interview demo](docs/INTERVIEW-DEMO-GUIDE.md) before presenting the project.

@@ -225,3 +225,7 @@ __marimo__/
 # Overrides the generic dist/ rule above.
 !/web/dist/
 !/web/dist/**
+
+# Frontend package installs and transient build caches.
+frontend/node_modules/
+frontend/.vite/
